@@ -4,7 +4,7 @@ import FileHelper
 
 fun main() {
     //--- Part One ---
-    val instructions = FileHelper.loadFileByLines("day_2/input.txt")
+    val instructions = FileHelper.loadInputFile("day_2/input.txt")
     var horizontalPosition = 0
     var deephtPosition = 0
 

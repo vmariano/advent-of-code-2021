@@ -4,7 +4,7 @@ import FileHelper
 
 fun main() {
     //--- Part One ---
-    val measurementList = FileHelper.loadInput("day_1/input.txt")
+    val measurementList = FileHelper.loadInputAsInt("day_1/input.txt")
     var result = -1
     measurementList.fold(0) { a, c ->
         if (a < c) {
