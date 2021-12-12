@@ -11,12 +11,12 @@ fun main() {
 
 }
 
-fun partOne(): Any? {
+fun partOne(): Int {
     return gammaRate().toInt(2) * epsilonRate().toInt(2)
 }
 
 fun epsilonRate(): String {
-    var readsMatrix = transposeInput()
+    val readsMatrix = transposeInput()
     var result = ""
     readsMatrix.forEach {
         result += if (it.filter { it.equals("1") }.size > it.filter { it.equals("0") }.size) {
@@ -29,7 +29,7 @@ fun epsilonRate(): String {
 }
 
 fun gammaRate(): String {
-    var readsMatrix = transposeInput()
+    val readsMatrix = transposeInput()
     var result = ""
     readsMatrix.forEach {
        result += if (it.filter { it.equals("1") }.size > it.filter { it.equals("0") }.size) {
@@ -41,11 +41,12 @@ fun gammaRate(): String {
     return result
 }
 
-private fun transposeInput(): kotlin.Array<kotlin.Array<String>> {
+private fun transposeInput(): Array<Array<String>> {
     val reads = FileHelper.loadInputFile("day_3/input.txt")
-    var readsMatrix = Array(12) { Array(reads.size) { "" } }
-    reads.forEachIndexed { i, it ->
-        val slicesItem = it.split("").filterNot { it.equals("") }
+    val numberSize = reads.first().length
+    val readsMatrix = Array(numberSize) { Array(reads.size) { "" } }
+    reads.forEachIndexed { i, number ->
+        val slicesItem = number.split("").filterNot { it.equals("") }
         slicesItem.forEachIndexed { j, item ->
             readsMatrix[j][i] = item
         }
