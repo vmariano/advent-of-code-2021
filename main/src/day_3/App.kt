@@ -26,6 +26,16 @@ class MatrixHelpers {
             }
             return readsMatrix
         }
+
+        fun filterIndexes(row: Array<String>, filterCriteria: String): MutableList<Int> {
+            val filterIndexes = mutableListOf<Int>()
+            row.forEachIndexed() { i, number ->
+                if (number == filterCriteria) {
+                    filterIndexes.add(i)
+                }
+            }
+            return filterIndexes
+        }
     }
 }
 
@@ -52,11 +62,7 @@ fun filterC02Rating(readsMatrix: Array<Array<String>>, rowIndex: Int): Int {
     val row = readsMatrix[rowIndex]
     val (match, rest) = row.partition { it == ("0") }
     val filterCriteria = if (match.size <= rest.size)  "0"  else "1"
-    val filterIndexes = mutableListOf<Int>()
-    row.filterIndexed { i, number ->
-        if (number == filterCriteria) { filterIndexes.add(i) }
-        number == filterCriteria
-    }
+    val filterIndexes = MatrixHelpers.filterIndexes(row, filterCriteria)
     val newMatrix = MatrixHelpers.reduceMatrix(readsMatrix, filterIndexes)
     return filterC02Rating(newMatrix, rowIndex+1)
 }
@@ -73,11 +79,7 @@ fun filterOxygenConditions(readsMatrix: Array<Array<String>>, rowIndex: Int): In
     val row = readsMatrix[rowIndex]
     val (match, rest) = row.partition { it == ("1") }
     val filterCriteria = if (match.size >= rest.size)  "1"  else "0"
-    val filterIndexes = mutableListOf<Int>()
-    row.filterIndexed { i, number ->
-        if (number == filterCriteria) { filterIndexes.add(i) }
-        number == filterCriteria
-    }
+    val filterIndexes = MatrixHelpers.filterIndexes(row, filterCriteria)
     val newMatrix = MatrixHelpers.reduceMatrix(readsMatrix, filterIndexes)
     return filterOxygenConditions(newMatrix, rowIndex+1)
 }
